@@ -117,23 +117,29 @@ body, .App {
 }
 .sidebar__form {
   display: flex;
-  gap: 0.3rem;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 0.45rem;
   margin-top: 14px;
-  margin-bottom: 5px;
+  margin-bottom: 7px;
 }
+
 .sidebar__input {
   flex: 1;
-  padding: 7px 10px;
-  font-size: 14px;
+  padding: 8.5px 11px;
+  font-size: 14.3px;
   border-radius: 7px;
-  border: 1px solid var(--primary-contrast);
+  border: 1.2px solid var(--primary-contrast);
   outline: none;
   background: var(--bg-primary);
+  margin-right: 0;
+  box-shadow: none;
   transition: border 0.14s;
 }
 .sidebar__input:focus {
   border: 2px solid var(--accent);
   background: #fefbe9;
+  box-shadow: 0 0 0 2px #fde3ba38;
 }
 .content-area {
   flex: 1;
@@ -253,48 +259,41 @@ body, .App {
 }
 
 /* Auth Styles */
+/* AUTH/LOGIN/SIGNUP FORMS */
 .auth-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 55px;
+  margin-top: 56px;
   min-height: 55vh;
+  background: none;
 }
 .auth-form {
   background: var(--bg-secondary);
-  padding: 42px 36px 38px 36px;
+  padding: 38px 36px 34px 36px;
   border-radius: 18px;
-  box-shadow: 0 3px 24px rgba(38,133,193,0.10), 0 1.5px 8px 0 rgba(40,60,90,0.04);
+  box-shadow: 0 2.5px 23px rgba(38,133,193,0.11), 0 1.5px 8px 0 rgba(40,60,90,0.03);
   min-width: 320px;
-  width: 365px;
+  width: 370px;
   max-width: 98vw;
   display: flex;
   flex-direction: column;
-  gap: 19px;
+  gap: 16px;
   align-items: stretch;
-  position: relative;
-  border: 1.5px solid var(--secondary);
-  backdrop-filter: blur(1.5px);
+  border: 1.15px solid var(--secondary);
+  backdrop-filter: blur(1.7px);
 }
 .auth-form h2 {
   font-weight: 700;
-  letter-spacing: 0.5px;
-  font-size: 28px;
-  margin-bottom: 24px;
+  letter-spacing: 0.3px;
+  font-size: 27px;
+  margin-bottom: 6px;
   color: var(--primary);
 }
-.auth-input {
-  border: 1.5px solid var(--primary-contrast);
-  padding: 9px 12px;
-  border-radius: 8.5px;
-  font-size: 15px;
-  margin-top: 7px;
-  background: #fff;
-  transition: border 0.14s;
-}
-.auth-input:focus {
-  border: 2px solid var(--accent);
-  background: #fefbe9;
+.auth-field-group {
+  margin-bottom: 0.6em;
+  display: flex;
+  flex-direction: column;
 }
 .auth-form label {
   font-size: 14.1px;
@@ -302,26 +301,59 @@ body, .App {
   text-align: left;
   font-weight: 500;
   letter-spacing: 0.01em;
-  margin-top: 1px;
+  margin-bottom: 3px;
+  margin-top: 9px;
 }
+.auth-input {
+  border: 1.2px solid var(--primary-contrast);
+  padding: 11px 13px 9px 13px;
+  border-radius: 7px;
+  font-size: 15px;
+  background: #fff;
+  margin: 0;
+  margin-bottom: 1px;
+  transition: border 0.15s, box-shadow 0.13s;
+  outline: none;
+  box-shadow: none;
+}
+.auth-input:focus {
+  border: 2px solid var(--accent);
+  background: #fefbe9;
+  box-shadow: 0 0 0 2.5px #fde3ba39;
+}
+.auth-form .alert, .auth-form .auth-error {
+  margin-top: 4px;
+  margin-bottom: 2px;
+}
+
 .auth-form button[type="submit"] {
   margin-top: 13px;
   width: 100%;
   font-size: 16px;
+  margin-bottom: 0;
+  box-shadow: 0 1.5px 6px rgba(44,134,193,0.07);
+}
+.auth-form .link-btn {
+  margin-left: 2px;
+}
+.auth-form > div:last-child {
+  margin-bottom: 0;
 }
 
 /* Notes Layout */
 .notes-layout {
   display: flex;
-  gap: 2rem;
+  gap: 2.2rem;
   min-height: min(550px, 80vh);
 }
+
+/* Panel Card effect for left and main content */
 .notes-list {
-  flex: 0 0 246px;
+  flex: 0 0 254px;
   background: #fff;
   border-radius: 13px;
-  box-shadow: 0 0 24px 0 rgba(44,153,193,0.10);
-  padding: 22px 14px 2.5rem 15px;
+  box-shadow: 0 0 28px 0 rgba(44,153,193,0.13);
+  padding: 22px 16px 2.2rem 17px;
   margin: 0;
   min-width: 170px;
   max-width: 263px;
@@ -329,25 +361,26 @@ body, .App {
   border-right: 1.9px solid var(--border-color);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 11px;
 }
 
 .notes-list-ul {
   list-style: none;
   margin: 0;
   padding: 0;
+  width: 100%;
 }
 
 .notes-list-item {
-  padding: 9px 10px 9px 14px;
+  padding: 11px 10px 9px 18px;
   margin-bottom: 7px;
-  border-radius: 9px;
+  border-radius: 10px;
   background: #fff;
   font-size: 15.2px;
   transition: 
     background 0.16s,
     color 0.13s,
-    box-shadow 0.16s,
+    box-shadow 0.14s,
     border 0.13s;
   cursor: pointer;
   border: 1.2px solid transparent;
@@ -355,6 +388,8 @@ body, .App {
   position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  gap: 3px;
 }
 .notes-list-item.selected,
 .notes-list-item:focus,
@@ -363,55 +398,92 @@ body, .App {
   color: var(--primary);
   border: 1.2px solid var(--primary);
   outline: none;
-  box-shadow: 0 1px 7px #aed6f193, 0 2px 6px rgba(44,153,193,0.09);
+  box-shadow: 0 1.5px 8px #aed6f198, 0 2px 7px rgba(44,153,193,0.12);
 }
 
+/* Main note editor */
 .notes-editor {
   flex: 1 1 auto;
   background: #fff;
   border-radius: 13px;
-  box-shadow: 0 0 24px 0 rgba(46,134,193,0.12), 0 1.5px 6px 0 rgba(40,60,90,0.04);
-  padding: 25px 27px 27px 30px;
+  box-shadow: 0 0 28px 0 rgba(46,134,193,0.13), 0 1.5px 6px 0 rgba(40,60,90,0.03);
+  padding: 34px 38px 34px 36px;
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
-
 .editor-form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 13px;
   align-items: stretch;
-  padding-top: 9px;
+  padding-top: 5px;
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+.editor-form label {
+  font-size: 14.1px;
+  color: var(--primary-contrast);
+  text-align: left;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  margin-bottom: 4px;
+  margin-top: 7px;
 }
 
 .editor-title, .editor-content {
   width: 100%;
   box-sizing: border-box;
-  border-radius: 8.5px;
-  border: 1.7px solid var(--primary);
-  margin-bottom: 6px;
-  padding: 11px 14px;
+  border-radius: 7px;
+  border: 1.5px solid var(--primary-contrast);
+  margin-bottom: 7px;
+  padding: 12px 15px;
   font-size: 17.3px;
   font-family: inherit;
   background: #f9fcff;
-  transition: border 0.13s;
+  transition: border 0.13s, box-shadow 0.11s;
 }
-
+.editor-title {
+  font-size: 17.8px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
 .editor-title:focus, .editor-content:focus {
   border: 2px solid var(--accent);
   background: #fefbe9;
   outline: none;
+  box-shadow: 0 0 0 2.5px #fde3ba35;
 }
-
 .editor-content {
-  min-height: 150px;
+  min-height: 144px;
+  font-size: 15.7px;
   resize: vertical;
   font-family: inherit;
+  margin-bottom: 7px;
+}
+
+.editor-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+/* Buttons area bottom alignment for editor */
+.editor-form button {
+  min-width: 108px;
 }
 
 @media (max-width: 1100px) {
-  .notes-layout { gap: 1.1rem; }
+  .notes-layout { gap: 1.08rem; }
+  .notes-list,
+  .notes-editor { padding-right: 18px; padding-left: 13px; }
 }
+
 @media (max-width: 900px) {
   .sidebar {
     position: absolute; left: 0; top: 62px; width: 97vw; min-width: 210px; z-index: 22;
@@ -424,20 +496,20 @@ body, .App {
   }
   .sidebar:not(.open) { left: -230px; box-shadow: none;}
   .main-layout { flex-direction: column; }
-  .content-area { padding: 1rem 0.8rem;}
-  .notes-layout { flex-direction: column; gap: 1.1rem;}
-  .notes-list { min-width: 100%; max-width: 100%; border-right: none; box-shadow: 0 2px 14px rgba(30,86,160,0.05);}
-  .notes-editor { padding: 12px 3vw; }
+  .content-area { padding: 1rem 0.5rem;}
+  .notes-layout { flex-direction: column; gap: 0.95rem;}
+  .notes-list { min-width: 99vw; max-width: 99vw; border-right: none; box-shadow: 0 2px 14px rgba(30,86,160,0.07);}
+  .notes-editor { padding: 17px 5vw 20px 5vw; }
 }
 @media (max-width: 700px) {
-  .navbar, .auth-form { padding: 0 12px;}
-  .notes-list { padding: 8px 4px 1.5rem 4px;}
-  .notes-editor { padding: 8px 1vw;}
+  .navbar, .auth-form { padding: 0 9px;}
+  .notes-list { padding: 9px 0 1.5rem 0;}
+  .notes-editor { padding: 10px 2vw;}
 }
 @media (max-width: 500px) {
-  .sidebar { width: 97vw; }
-  .auth-form { width: 99vw; min-width: unset; padding: 11px 1vw;}
-  .notes-list { padding: 5px 2px;}
+  .sidebar { width: 98vw; }
+  .auth-form { width: 99vw; min-width: unset; padding: 10px 0.8vw;}
+  .notes-list { padding: 4px 1px;}
 }
 
 :focus-visible {

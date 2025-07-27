@@ -101,12 +101,15 @@ function AuthPage({ setUser, apiBase }) {
   return (
     <div className="auth-container">
       <form className="auth-form" onSubmit={handleSubmit} autoComplete="off">
-        <h2 style={{ color: "var(--primary)", marginBottom: 18 }}>
+        <h2>
           {isSignup ? "Sign Up" : "Login"}
         </h2>
-        <label>
-          Username
+        <div className="auth-field-group">
+          <label htmlFor="auth-username">
+            Username
+          </label>
           <input
+            id="auth-username"
             name="username"
             className="auth-input"
             value={fields.username}
@@ -114,10 +117,13 @@ function AuthPage({ setUser, apiBase }) {
             required
             autoFocus
           />
-        </label>
-        <label>
-          Password
+        </div>
+        <div className="auth-field-group">
+          <label htmlFor="auth-password">
+            Password
+          </label>
           <input
+            id="auth-password"
             name="password"
             className="auth-input"
             type="password"
@@ -125,11 +131,14 @@ function AuthPage({ setUser, apiBase }) {
             onChange={handleChange}
             required
           />
-        </label>
+        </div>
         {isSignup && (
-          <label>
-            Confirm Password
+          <div className="auth-field-group">
+            <label htmlFor="auth-confirm">
+              Confirm Password
+            </label>
             <input
+              id="auth-confirm"
               name="confirm"
               className="auth-input"
               type="password"
@@ -137,13 +146,13 @@ function AuthPage({ setUser, apiBase }) {
               onChange={handleChange}
               required
             />
-          </label>
+          </div>
         )}
         {error && <div className="alert auth-error">{error}</div>}
         <button className="btn btn-primary" type="submit" disabled={loading}>
           {loading ? "Please wait..." : isSignup ? "Sign Up" : "Login"}
         </button>
-        <div style={{ marginTop: 14 }}>
+        <div style={{ marginTop: 13, textAlign: "center" }}>
           {isSignup
             ? (
               <span>

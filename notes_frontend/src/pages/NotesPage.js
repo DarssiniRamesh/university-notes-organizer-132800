@@ -86,12 +86,12 @@ function NotesPage({ apiBase, user }) {
   return (
     <div className="notes-layout">
       <div className="notes-list">
-        <div style={{ display: "flex", alignItems: "center", marginBottom: 10 }}>
-          <h3 style={{ color: "var(--primary)", flex: 1, margin: 0, fontSize: 20 }}>My Notes</h3>
-          <button className="btn btn-accent btn-small" onClick={handleCreateNew}>+ New Note</button>
+        <div style={{ display: "flex", alignItems: "center", marginBottom: 16 }}>
+          <h3 style={{ color: "var(--primary)", flex: 1, margin: 0, fontSize: 20, paddingLeft: 2 }}>My Notes</h3>
+          <button className="btn btn-accent btn-small" style={{ minWidth: 95 }} onClick={handleCreateNew}>+ New Note</button>
         </div>
         {loading ? (
-          <div>Loading...</div>
+          <div style={{ padding: "15px 8px", textAlign: "center" }}>Loading...</div>
         ) : (
           <ul className="notes-list-ul">
             {notes.map((note) => (
@@ -100,16 +100,20 @@ function NotesPage({ apiBase, user }) {
                 key={note.id}
                 onClick={() => handleNoteSelect(note)}
               >
-                <b>{note.title.slice(0, 40) || "[No title]"}</b>
-                <div style={{ fontSize: 13, color: "var(--primary)" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <b style={{ maxWidth: "81%", overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis" }}>
+                    {note.title.slice(0, 40) || "[No title]"}
+                  </b>
+                  <button
+                    className="btn btn-small btn-secondary"
+                    style={{ marginLeft: 8, minWidth: 32, marginTop: 0 }}
+                    onClick={e => { e.stopPropagation(); handleDelete(note.id); }}
+                    title="Delete"
+                  >🗑️</button>
+                </div>
+                <div style={{ fontSize: 12.5, color: "var(--primary)", marginTop: 1 }}>
                   {note.updated_at ? new Date(note.updated_at).toLocaleString() : ""}
                 </div>
-                <button
-                  className="btn btn-small btn-secondary"
-                  style={{ marginLeft: 8, float: 'right' }}
-                  onClick={e => { e.stopPropagation(); handleDelete(note.id); }}
-                  title="Delete"
-                >🗑️</button>
               </li>
             ))}
           </ul>
@@ -118,26 +122,28 @@ function NotesPage({ apiBase, user }) {
       <div className="notes-editor">
         {editing || !selected ? (
           <form className="editor-form" onSubmit={handleSave}>
+            <label htmlFor="note-title">Title</label>
             <input
+              id="note-title"
               name="title"
               className="editor-title"
               placeholder="Note title"
               value={editor.title}
               onChange={handleEditorChange}
-              style={{ fontSize: 18, marginBottom: 10 }}
               required
             />
+            <label htmlFor="note-content">Content</label>
             <textarea
+              id="note-content"
               name="content"
               className="editor-content"
               placeholder="Note content..."
-              rows={12}
+              rows={9}
               value={editor.content}
               onChange={handleEditorChange}
-              style={{ fontSize: 16, width: "100%" }}
               required
             />
-            <div style={{ marginTop: 12 }}>
+            <div className="editor-buttons">
               <button className="btn btn-primary" type="submit">
                 {editor.id ? "Save Changes" : "Create Note"}
               </button>
@@ -145,7 +151,6 @@ function NotesPage({ apiBase, user }) {
                 <button
                   className="btn btn-secondary"
                   type="button"
-                  style={{ marginLeft: 10 }}
                   onClick={() => setEditing(false)}
                 >Cancel</button>
               )}
@@ -153,17 +158,17 @@ function NotesPage({ apiBase, user }) {
           </form>
         ) : selected ? (
           <div>
-            <h2 style={{ margin: 0, color: "var(--primary)" }}>{selected.title}</h2>
-            <div style={{ whiteSpace: "pre-wrap", margin: "12px 0" }}>{selected.content}</div>
-            <div style={{ fontSize: 13, color: "#888", marginTop: 22 }}>
+            <h2 style={{ margin: 0, color: "var(--primary)", fontWeight: 700 }}>{selected.title}</h2>
+            <div style={{ whiteSpace: "pre-wrap", margin: "14px 0 7px 0", fontSize: 15.7 }}>{selected.content}</div>
+            <div style={{ fontSize: 13, color: "#888", marginTop: 20, marginBottom: 12 }}>
               Last edited: {selected.updated_at ? new Date(selected.updated_at).toLocaleString() : ""}
             </div>
-            <button className="btn btn-accent" onClick={() => setEditing(true)} style={{ marginTop: 10 }}>
+            <button className="btn btn-accent" onClick={() => setEditing(true)} style={{ marginTop: 7 }}>
               Edit Note
             </button>
           </div>
         ) : (
-          <div style={{ color: "#aaa", fontSize: 22, margin: 60, textAlign: "center" }}>
+          <div style={{ color: "#aaa", fontSize: 21, margin: "55px 0", textAlign: "center" }}>
             Select or create a note to start!
           </div>
         )}
