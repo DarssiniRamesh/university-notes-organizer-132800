@@ -5,13 +5,16 @@ This project provides a minimal React template with a clean, modern UI and minim
 ## Features
 
 - **Lightweight**: No heavy UI frameworks - uses only vanilla CSS and React
-- **Modern UI**: Clean, responsive design with KAVIA brand styling
+- **Modern UI**: Clean, responsive design
 - **Fast**: Minimal dependencies for quick loading times
 - **Simple**: Easy to understand and modify
+- **Backend API Only**: Connects to a FastAPI + SQLite backend over REST. No Supabase or external BaaS.
 
 ## Getting Started
 
-In the project directory, you can run:
+This frontend connects to the backend REST API only.
+1. Start the FastAPI backend server (`notes_backend`).  
+2. Run this React frontend and it will communicate with the backend via HTTP requests.
 
 ### `npm start`
 
@@ -31,17 +34,7 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 ### Colors
 
-The main brand colors are defined as CSS variables in `src/App.css`:
-
-```css
-:root {
-  --kavia-orange: #E87A41;
-  --kavia-dark: #1A1A1A;
-  --text-color: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(255, 255, 255, 0.1);
-}
-```
+The main brand colors are defined as CSS variables in `src/App.css`.
 
 ### Components
 
@@ -56,27 +49,3 @@ Common components include:
 ## Learn More
 
 To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
