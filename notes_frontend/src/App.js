@@ -8,6 +8,7 @@ import { getUserFromLocalStorage } from "./utils/auth";
 import "./App.css";
 
 const apiBase = "https://vscode-internal-6102-beta.beta01.cloud.kavia.ai:3001";
+// All API requests use apiBase as the backend base URL
 
 function AppContainer() {
   const [user, setUser] = useState(getUserFromLocalStorage());

@@ -18,11 +18,14 @@ function Sidebar({ open, onToggle, apiBase, token }) {
   // Fetch categories/tags
   useEffect(() => {
     if (!token) return;
-    fetch(`${apiBase}/categories`, {
+    fetch(`${apiBase}/categories/`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(res => res.ok ? res.json() : [])
-      .then(data => setCategories(data.categories || []))
+      .then(data => {
+        // Backend returns array, not an object with categories
+        setCategories(Array.isArray(data) ? data : []);
+      })
       .catch(() => setCategories([]));
   }, [token, apiBase]);
 
@@ -31,7 +34,7 @@ function Sidebar({ open, onToggle, apiBase, token }) {
     e.preventDefault();
     setError("");
     if (!newCat.trim()) return;
-    fetch(`${apiBase}/categories`, {
+    fetch(`${apiBase}/categories/`, {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
       body: JSON.stringify({ name: newCat })
@@ -52,7 +55,7 @@ function Sidebar({ open, onToggle, apiBase, token }) {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(res => {
-        if (res.ok) setCategories(categories.filter(c => c.id !== id));
+        if (res.status === 204) setCategories(categories.filter(c => c.id !== id));
       });
   }
 

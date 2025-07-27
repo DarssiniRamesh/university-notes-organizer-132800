@@ -18,11 +18,14 @@ function NotesPage({ apiBase, user }) {
   // Load notes
   useEffect(() => {
     setLoading(true);
-    fetch(`${apiBase}/notes`, {
+    fetch(`${apiBase}/notes/`, {
       headers: { Authorization: `Bearer ${user.token}` },
     })
-      .then((res) => res.ok ? res.json() : [])
-      .then((data) => { setNotes(data.notes || []); })
+      .then(res => res.ok ? res.json() : [])
+      .then((data) => {
+        // data is array of notes per OpenAPI
+        setNotes(Array.isArray(data) ? data : []);
+      })
       .finally(() => setLoading(false));
   }, [apiBase, user.token]);
 
@@ -44,7 +47,7 @@ function NotesPage({ apiBase, user }) {
 
   function handleSave(e) {
     e.preventDefault();
-    const url = editor.id ? `${apiBase}/notes/${editor.id}` : `${apiBase}/notes`;
+    const url = editor.id ? `${apiBase}/notes/${editor.id}` : `${apiBase}/notes/`;
     const method = editor.id ? "PUT" : "POST";
     fetch(url, {
       method,
@@ -52,9 +55,9 @@ function NotesPage({ apiBase, user }) {
         "Content-Type": "application/json",
         Authorization: `Bearer ${user.token}`,
       },
-      body: JSON.stringify({ title: editor.title, content: editor.content }),
+      body: JSON.stringify({ title: editor.title, content: editor.content })
     })
-      .then((res) => res.ok ? res.json() : Promise.reject("Save failed"))
+      .then(res => res.ok ? res.json() : Promise.reject("Save failed"))
       .then((data) => {
         if (editor.id) {
           setNotes(notes.map((n) => (n.id === data.id ? data : n)));
@@ -72,13 +75,12 @@ function NotesPage({ apiBase, user }) {
     fetch(`${apiBase}/notes/${noteId}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${user.token}` }
-    })
-      .then(res => {
-        if (res.ok) {
-          setNotes(notes.filter(n => n.id !== noteId));
-          setSelected(null);
-        }
-      });
+    }).then(res => {
+      if (res.status === 204) {
+        setNotes(notes.filter(n => n.id !== noteId));
+        setSelected(null);
+      }
+    });
   }
 
   return (
